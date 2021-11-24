@@ -71,6 +71,6 @@ elif 'Google' in text:
 #elif 'joke' in text: DO NOT USE PYJOKES- IT IS HORRIBLE
 #elif text == "what is the weather":
 # potentially make an alarm system using datetime and the text to speech thing
-
+#testing git commits
 else:
     speak('I cannot hear you')
