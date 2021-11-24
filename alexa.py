@@ -68,6 +68,16 @@ elif 'Google' in text:
     text = text.replace('Google',"")
     #searching up the thing in a new tab
     webbrowser.open_new_tab("https://www.google.com/search?q=" + text + "&start=")
+
+elif 'Youtube' in text:
+    #replacing text with text without youtube
+    text = text.replace('Youtube',"")
+    #going to Youtube
+    webbrowser.open_new_tab("https://www.youtube.com/")
+    #clicking on search bar
+    #typing text into search bar
+    #clicking searching
+    #clicking first option
 #elif 'joke' in text: DO NOT USE PYJOKES- IT IS HORRIBLE
 #elif text == "what is the weather":
 # potentially make an alarm system using datetime and the text to speech thing
