@@ -68,21 +68,21 @@ elif 'Google' in text:
     #searching up the thing in a new tab
     webbrowser.open_new_tab("https://www.google.com/search?q=" + text + "&start=")
 
-elif 'Youtube' in text:
+elif 'watch' in text:
     #replacing text with text without youtube
-    text = text.replace('Youtube',"")
+    text = text.replace('watch',"")
     #going to Youtube
     webbrowser.open_new_tab("https://www.youtube.com/")
     #clicking on search bar
-    pag.moveTo(596,170, duration = 0.75)
+    pag.moveTo(596,170, duration = 2.5)
     mouse.click('left')
     #typing text into search bar
-    pag.typewrite(text, interval=0.05)
+    pag.typewrite(text, interval = 0.05)
     #clicking searching]
-    pag.moveTo(1260,170,interval=0.1)
+    pag.moveTo(1260,170,duration = 0.25)
     mouse.click('left')
     #clicking first option
-    pag.moveTo(650,350,interval = 0.25)
+    pag.moveTo(650,350,duration = 3)
     mouse.click('left')
 #elif 'joke' in text: DO NOT USE PYJOKES- IT IS HORRIBLE
 #elif text == "what is the weather":
