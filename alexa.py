@@ -43,18 +43,18 @@ elif "Korean pop" in text:
     pag.moveTo(801, 308, duration = 1)
     mouse.click('left')
 elif "play Korean pop" in text:
-        #opens menu
-        pag.moveTo(192, 1064, duration = .15)
-        mouse.click('left')
-        #opens groove
-        pag.moveTo(658, 380, duration = .25)
-        mouse.click('left')
-        #hits kpop
-        pag.moveTo(54, 504, duration = 2.5)
-        mouse.click('left')
-        #hits play all
-        pag.moveTo(801, 308, duration = 1)
-        mouse.click('left')
+    #opens menu
+    pag.moveTo(192, 1064, duration = .15)
+    mouse.click('left')
+    #opens groove
+    pag.moveTo(658, 380, duration = .25)
+    mouse.click('left')
+    #hits kpop
+    pag.moveTo(54, 504, duration = 2.5)
+    mouse.click('left')
+    #hits play all
+    pag.moveTo(801, 308, duration = 1)
+    mouse.click('left')
 elif 'who is' in text:
     text = text.replace('who is',"")
     speak(wikipedia.summary(text,2))
