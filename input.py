@@ -1,6 +1,6 @@
 import mouse
 import pyautogui
-
+#getting position of the mouse
 x = mouse.get_position()
 print(x)
 #opens menu
