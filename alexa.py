@@ -10,19 +10,20 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.chrome.options
-import Optionsimport speech_recognition as sr
+from selenium.webdriver.chrome.options import Options
+import speech_recognition as sr
+import time
 
 r = sr.Recognizer()
-with sr.Microphone() as source:
+#with sr.Microphone() as source:
     # read the audio data from the default microphone
-    audio_data = r.record(source, duration=5)
+#    audio_data = r.record(source, duration=5)
     # record the data from the microphone for 5 seconds
-    print("Recognizing...")
+#    print("Recognizing...")
     # convert speech to text
-    text = r.recognize_google(audio_data)
-    print(text)
-
+#    text = r.recognize_google(audio_data)
+#    print(text)
+text = input('testing version, what command do you want to use? ')
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[0].id)
@@ -32,9 +33,7 @@ def speak(audio):
     engine.runAndWait()
 
 #setting up selenium
-chrome_options = Options()
-chrome_options.add_experimental_option("detach", True)
-driver = webdriver.Chrome(chrome_options = chrome_options, executable_path=r'C:\Users\jeetd\downloads\chromedriver')
+
 #starting the if statements
 if 'what time is it' in text:
     time = datetime.datetime.now().strftime('%I %M %p')
@@ -81,15 +80,20 @@ elif 'Google' in text:
     webbrowser.open_new_tab("https://www.google.com/search?q=" + text + "&start=")
 
 elif 'watch' in text:
+    chrome_options = Options()
+    chrome_options.add_experimental_option("detach", True)
+    driver = webdriver.Chrome(chrome_options = chrome_options, executable_path=r'C:\Users\jeetd\downloads\chromedriver')
     text = text.replace('watch',"")
     #opens youtube and waits for it to load
     driver.get('https://www.youtube.com/')
     #finds the search bar using its html dom thing idk just click on the element and inspect it
     search_bar = driver.find_element_by_name("search_query")
+    search_button = driver.find_element_by_id("button")
     #puts stuff in search bar
     search_bar.send_keys(text)
-    #clicks return
+    time.sleep(1)
     search_bar.send_keys(Keys.RETURN)
+    #pag.press('enter')
 #elif 'joke' in text: DO NOT USE PYJOKES- IT IS HORRIBLE
 #elif text == "what is the weather":
 # potentially make an alarm system using datetime and the text to speech thing
