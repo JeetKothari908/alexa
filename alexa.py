@@ -15,15 +15,15 @@ import speech_recognition as sr
 import time
 
 r = sr.Recognizer()
-#with sr.Microphone() as source:
+with sr.Microphone() as source:
     # read the audio data from the default microphone
-#    audio_data = r.record(source, duration=5)
+    audio_data = r.record(source, duration=5)
     # record the data from the microphone for 5 seconds
-#    print("Recognizing...")
+    print("Recognizing...")
     # convert speech to text
-#    text = r.recognize_google(audio_data)
-#    print(text)
-text = input('testing version, what command do you want to use? ')
+    text = r.recognize_google(audio_data)
+    print(text)
+#text = input('testing version, what command do you want to use? ')
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[0].id)
