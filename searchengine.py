@@ -8,6 +8,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 import speech_recognition as sr
 import time
+import pandas as pd
+
 chrome_options = Options()
 chrome_options.add_experimental_option("detach", True)
 youtube = input("do you want to search things on youtube? ")
@@ -26,7 +28,12 @@ if youtube == 'yes':
     search_bar.send_keys(Keys.RETURN)
     time.sleep(.35)
     wait.until(expected_conditions.presence_of_element_located((By.ID,"img" )))
-    title1 = driver.find_element_by_id("video-title")
+    title1 = driver.find_element_by_class_name("style-scope ytd-channel-name")
+    ytstuff = []
+    ytstuff.append(title1)
+    ytstuff_pd = pd.DataFrame(ytstuff)
+    ytstuff_pd.columns('images')
+    ytstuff_pd.to_csv('ytstuff.csv', index = false)
     if searching in title1:
         title1.click()
     #wait.until(expected_conditions.visibility_of_element_located((By.ID,"img" )))
