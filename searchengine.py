@@ -9,6 +9,9 @@ from selenium.webdriver.chrome.options import Options
 import speech_recognition as sr
 import time
 import pandas as pd
+import numpy as np
+import pyautogui
+import mouse
 
 chrome_options = Options()
 chrome_options.add_experimental_option("detach", True)
@@ -27,18 +30,13 @@ if youtube == 'yes':
     time.sleep(1)
     search_bar.send_keys(Keys.RETURN)
     time.sleep(.35)
-    wait.until(expected_conditions.presence_of_element_located((By.ID,"img" )))
-    title1 = driver.find_element_by_class_name("style-scope ytd-channel-name")
-    ytstuff = []
-    ytstuff.append(title1)
-    ytstuff_pd = pd.DataFrame(ytstuff)
-    ytstuff_pd.columns('images')
-    ytstuff_pd.to_csv('ytstuff.csv', index = false)
-    if searching in title1:
-        title1.click()
+    wait.until(expected_conditions.presence_of_element_located((By.ID,"video-title" )))
+    pyautogui.moveTo(477, 483, duration = .000000000001)
+    mouse.click('left')
+    #if searching in title1:
+        #title1.click()
     #wait.until(expected_conditions.visibility_of_element_located((By.ID,"img" )))
     #wait.until(expected_conditions.element_to_be_clickable((By.ID,"video-title"))).click()
-
 
 
 
