@@ -84,6 +84,7 @@ elif 'watch' in text:
     chrome_options.add_experimental_option("detach", True)
     driver = webdriver.Chrome(chrome_options = chrome_options, executable_path=r'C:\Users\jeetd\downloads\chromedriver')
     text = text.replace('watch',"")
+    wait = WebDriverWait(driver, 25)
     #opens youtube and waits for it to load
     driver.get('https://www.youtube.com/')
     #finds the search bar using its html dom thing idk just click on the element and inspect it
@@ -95,10 +96,10 @@ elif 'watch' in text:
     search_bar.send_keys(Keys.RETURN)
     time.sleep(0.1)
     wait.until(expected_conditions.visibility_of_element_located((By.ID,"video-title" )))
-    wait.until(expected_conditions.element_to_be_clickable((By.ID,"video-title" )))
-    time.sleep(0.25)
-    pyautogui.moveTo(477, 483, duration = .00000001)
-    mouse.click('left')
+    wait.until(expected_conditions.element_to_be_clickable((By.ID,"video-title" ))).click()
+    #time.sleep(0.25)
+    #pyautogui.moveTo(477, 483, duration = .00000001)
+    #mouse.click('left')
     #pag.press('enter')
 #elif 'joke' in text: DO NOT USE PYJOKES- IT IS HORRIBLE
 #elif text == "what is the weather":
