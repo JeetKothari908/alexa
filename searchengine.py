@@ -19,26 +19,20 @@ youtube = input("do you want to search things on youtube? ")
 if youtube == 'yes':
     searching = input("what do you want to search? ")
     #dont touch this code idk what it does but it does something important
+
+    searching = searching.replace(" ", '+')
+    youtub2 = 'https://www.youtube.com/results?search_query='
+    youtub2 = youtub2 + searching
     driver = webdriver.Chrome(chrome_options = chrome_options, executable_path=r'C:\Users\jeetd\downloads\chromedriver')
     wait = WebDriverWait(driver, 25)
-    #opens youtube and waits for it to load
-    driver.get('https://www.youtube.com/')
-    #finds the search bar using its html dom thing idk just click on the element and inspect it
-    search_bar = driver.find_element_by_name("search_query")
-    #puts stuff in search bar
-    search_bar.send_keys(searching)
-    time.sleep(1)
-    search_bar.send_keys(Keys.RETURN)
-    time.sleep(0.1)
-    wait.until(expected_conditions.visibility_of_element_located((By.ID,"video-title" )))
-    wait.until(expected_conditions.element_to_be_clickable((By.ID,"video-title" )))
-    time.sleep(0.25)
-    pyautogui.moveTo(477, 483, duration = .00000001)
-    mouse.click('left')
+    driver.get(youtub2)
+
+    wait.until(expected_conditions.element_to_be_clickable((By.ID,"video-title" ))).click()
     #if searching in title1:
         #title1.click()
     #wait.until(expected_conditions.visibility_of_element_located((By.ID,"img" )))
     #wait.until(expected_conditions.element_to_be_clickable((By.ID,"video-title"))).click()
+    #wait.until(expected_conditions.visibility_of_element_located((By.ID,"video-title" )))
 
 
 
@@ -50,7 +44,15 @@ if youtube == 'yes':
     #print(driver.current_url)
     #closes browser
     #driver.close()
-
+    #opens youtube and waits for it to load
+    #driver.get('https://www.youtube.com/')
+    #finds the search bar using its html dom thing idk just click on the element and inspect it
+    #search_bar = driver.find_element_by_name("search_query")
+    #puts stuff in search bar
+    #search_bar.send_keys(searching)
+    #time.sleep(1)
+    #search_bar.send_keys(Keys.RETURN)
+    #time.sleep(0.1)
 
 #text = input('what do you want to search?  ')
 #googling the input text

@@ -21,9 +21,9 @@ with sr.Microphone() as source:
     # record the data from the microphone for 5 seconds
     print("Recognizing...")
     # convert speech to text
-    text = r.recognize_google(audio_data)
-    print(text)
-#text = input('testing version, what command do you want to use? ')
+    #text = r.recognize_google(audio_data)
+    #print(text)
+text = input('testing version, what command do you want to use? ')
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[0].id)
@@ -86,21 +86,13 @@ elif 'watch' in text:
     text = text.replace('watch',"")
     wait = WebDriverWait(driver, 25)
     #opens youtube and waits for it to load
-    driver.get('https://www.youtube.com/')
-    #finds the search bar using its html dom thing idk just click on the element and inspect it
-    search_bar = driver.find_element_by_name("search_query")
-    search_button = driver.find_element_by_id("button")
-    #puts stuff in search bar
-    search_bar.send_keys(text)
-    time.sleep(1)
-    search_bar.send_keys(Keys.RETURN)
-    time.sleep(0.1)
-    wait.until(expected_conditions.visibility_of_element_located((By.ID,"video-title" )))
-    wait.until(expected_conditions.element_to_be_clickable((By.ID,"video-title" ))).click()
-    #time.sleep(0.25)
-    #pyautogui.moveTo(477, 483, duration = .00000001)
-    #mouse.click('left')
-    #pag.press('enter')
+    #alternate idea- use
+    text = text.replace(" ", +)
+    youtub2 = 'https://www.youtube.com/results?search_query='
+    youtub2 = youtub2.append(text)
+    driver.get(youtub2)
+    wait.until(expected_conditions.visibility_of_element_located((By.ID,"video-title" ))).click()
+
 #elif 'joke' in text: DO NOT USE PYJOKES- IT IS HORRIBLE
 #elif text == "what is the weather":
 # potentially make an alarm system using datetime and the text to speech thing
