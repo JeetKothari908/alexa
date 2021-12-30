@@ -21,9 +21,9 @@ with sr.Microphone() as source:
     # record the data from the microphone for 5 seconds
     print("Recognizing...")
     # convert speech to text
-    #text = r.recognize_google(audio_data)
-    #print(text)
-text = input('testing version, what command do you want to use? ')
+    text = r.recognize_google(audio_data)
+    print(text)
+#text = input('testing version, what command do you want to use? ')
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[0].id)
@@ -80,18 +80,27 @@ elif 'Google' in text:
     webbrowser.open_new_tab("https://www.google.com/search?q=" + text + "&start=")
 
 elif 'watch' in text:
+    text = text.replace("watch", '')
+    text = text.replace(" ", '+')
+    youtub2 = 'https://www.youtube.com/results?search_query='
+    youtub2 = youtub2 + text
     chrome_options = Options()
     chrome_options.add_experimental_option("detach", True)
     driver = webdriver.Chrome(chrome_options = chrome_options, executable_path=r'C:\Users\jeetd\downloads\chromedriver')
-    text = text.replace('watch',"")
     wait = WebDriverWait(driver, 25)
-    #opens youtube and waits for it to load
-    #alternate idea- use
-    text = text.replace(" ", +)
-    youtub2 = 'https://www.youtube.com/results?search_query='
-    youtub2 = youtub2.append(text)
     driver.get(youtub2)
-    wait.until(expected_conditions.visibility_of_element_located((By.ID,"video-title" ))).click()
+    wait.until(expected_conditions.element_to_be_clickable((By.ID,"video-title" ))).click()
+
+elif 'listen to' in text:
+    chrome_options = Options()
+    chrome_options.add_experimental_option("detach", True)
+    driver = webdriver.Chrome(chrome_options = chrome_options, executable_path=r'C:\Users\jeetd\downloads\chromedriver')
+    text = text.replace('listen to',"")
+    wait = WebDriverWait(driver, 25)
+    text = text.replace(" ", '%20')
+    youtub2 = 'https://open.spotify.com/search/'
+    youtub2 = youtub2.append(text)
+    wait.until(expected_conditions.visibility_of_element_located((By.ID,"cidsyncjs" ))).click()
 
 #elif 'joke' in text: DO NOT USE PYJOKES- IT IS HORRIBLE
 #elif text == "what is the weather":
