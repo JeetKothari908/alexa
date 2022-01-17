@@ -1,10 +1,27 @@
 import speech_recognition as sr
-r = sr.Recognizer()
-with sr.Microphone() as source:
-    # read the audio data from the default microphone
-    audio_data = r.record(source, duration=5)
-    # record the data from the microphone for 5 seconds
-    print("Recognizing...")
-    # convert speech to text
-    text = r.recognize_google(audio_data)
-    print(text)
+import pyttsx3
+engine = pyttsx3.init('sapi5')
+voices = engine.getProperty('voices')
+engine.setProperty('voice', voices[0].id)
+
+def speak(audio):
+    engine.say(audio)
+    engine.runAndWait()
+
+def command():
+    r = sr.Recognizer()
+    while True:
+        with sr.Microphone() as source:
+            print('Listening')
+            audio=r.listen(source)
+            try:
+                text = r.recognize_google(audio)
+                print(text)
+                return text
+                break
+            except:
+                speak("Try Again")
+while True:
+    text = command().lower() ## takes user command
+    if 'end' in text:
+        exit()
