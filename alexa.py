@@ -19,6 +19,44 @@ engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[0].id)
 
+def closer():
+    thing = 0
+    thing = nottime.text
+    print(thing)
+    thing = thing.replace('0:00 / ', "")
+    thing = thing.replace(':', ".")
+    thing = thing.replace(' ', '')
+    print(thing)
+    thing = float(thing)
+    thing = thing * 100
+    thing2 = thing
+    while thing >= 100:
+        thing2 = thing2 - 40
+        thing = thing - 100
+
+    round(thing2)
+    thing = int(thing2)
+    print(thing2)
+    time.sleep(thing2)
+def closeradd():
+    thing = 0
+    thing = nottime.text
+    print(thing)
+    thing = thing.replace('0:00 / ', "")
+    thing = thing.replace(':', ".")
+    print(thing)
+    thing = thing.replace(' ', '')
+    thing = float(thing)
+    thing = thing * 100
+    thing2 = thing
+    while thing >= 100:
+        thing2 = thing2 - 40
+        thing = thing - 100
+    if thing2 > 30:
+        time.sleep(6)
+        skipad = driver.find_element_by_xpath('//*[@id="ad-text:6"]').click()
+    else:
+        time.sleep(thing2)
 def speak(audio):
     engine.say(audio)
     engine.runAndWait()
@@ -93,13 +131,33 @@ while True:
             chrome_options.add_experimental_option("detach", True)
             driver = webdriver.Chrome(chrome_options = chrome_options, executable_path=r'C:\Users\jeetd\downloads\chromedriver')
             wait = WebDriverWait(driver, 25)
+
             driver.get(youtub2)
-            wait.until(expected_conditions.element_to_be_clickable((By.XPATH,'//*[@id="contents"]/ytmusic-responsive-list-item-renderer/div[2]/div[1]/yt-formatted-string/a'))).click()
-            time = find_element_by_xpath('//*[@id="left-controls"]/span')
-            print(time)
+            wait.until(expected_conditions.element_to_be_clickable((By.XPATH,'//*[@id="contents"]/ytmusic-responsive-list-item-renderer[2]/div[2]/div[1]/yt-formatted-string/a'))).click()
+            wait.until(expected_conditions.visibility_of_element_located((By.XPATH,'//*[@id="left-controls"]/span')))
+            time.sleep(4)
+            nottime = driver.find_element_by_xpath('//*[@id="player-overlay:0"]/div[2]/span[2]/div[1]')
+            closeradd()
+            time.sleep(1)
+            nottime = driver.find_element_by_xpath('//*[@id="left-controls"]/span')
+            closer()
+            driver.close()
         elif 'playlist' in text:
             text = text.replace('playlist', "")
             text = text.replace(' ', "+")
+            f = '0'
+            for character in text:
+
+                if character.isdigit():
+
+                    contains_digit = True
+                    f = f + character
+            f = f.replace('0', "", 1)
+            print(contains_digit)
+            print(f)
+            text = text.replace(f, "")
+            f = int(f)
+            text = text +' playlist'
             youtub2 = 'https://music.youtube.com/search?q='
             youtub2 = youtub2 + text
             chrome_options = Options()
@@ -107,12 +165,33 @@ while True:
             driver = webdriver.Chrome(chrome_options = chrome_options, executable_path=r'C:\Users\jeetd\downloads\chromedriver')
             wait = WebDriverWait(driver, 25)
             driver.get(youtub2)
-            wait.until(expected_conditions.element_to_be_clickable((By.XPATH,'//*[@id="contents"]/ytmusic-responsive-list-item-renderer/a'))).click()
-            time.sleep(2)
+            wait.until(expected_conditions.element_to_be_clickable((By.XPATH,'//*[@id="contents"]/ytmusic-responsive-list-item-renderer[2]/div[2]/div[1]/yt-formatted-string/a'))).click()
             wait.until(expected_conditions.element_to_be_clickable((By.XPATH, '//*[@id="play-button"]/div/yt-icon'))).click()
+            time.sleep(4)
+            nottime = driver.find_element_by_xpath('//*[@id="player-overlay:0"]/div[2]/span[2]/div[1]')
+            closeradd()
+            print(f)
+            f = f * 60
+            f = f + 1
+            time.sleep(f)
+
+            driver.close()
         elif 'artist' in text:
             text = text.replace('artist', "")
             text = text.replace(' ', "+")
+            f = '0'
+            for character in text:
+
+                if character.isdigit():
+
+                    contains_digit = True
+                    f = f + character
+            f = f.replace('0', "", 1)
+            print(contains_digit)
+            print(f)
+            text = text.replace(f, "")
+            f = int(f)
+            text = text +' artist'
             youtub2 = 'https://music.youtube.com/search?q='
             youtub2 = youtub2 + text
             chrome_options = Options()
@@ -120,15 +199,18 @@ while True:
             driver = webdriver.Chrome(chrome_options = chrome_options, executable_path=r'C:\Users\jeetd\downloads\chromedriver')
             wait = WebDriverWait(driver, 25)
             driver.get(youtub2)
-            wait.until(expected_conditions.element_to_be_clickable((By.XPATH,'//*[@id="contents"]/ytmusic-responsive-list-item-renderer/a'))).click()
-            time.sleep(2)
+            wait.until(expected_conditions.element_to_be_clickable((By.XPATH,'//*[@id="contents"]/ytmusic-responsive-list-item-renderer[2]/div[2]/div[1]/yt-formatted-string/a'))).click()
             wait.until(expected_conditions.element_to_be_clickable((By.XPATH, '//*[@id="play-button"]/div/yt-icon'))).click()
-    elif 'close browser' in text:
-        chrome_options = Options()
-        chrome_options.add_experimental_option("detach", True)
-        driver = webdriver.Chrome(chrome_options = chrome_options, executable_path=r'C:\Users\jeetd\downloads\chromedriver')
-        wait = WebDriverWait(driver, 25)
-        driver.quit()
+            time.sleep(4)
+            nottime = driver.find_element_by_xpath('//*[@id="player-overlay:0"]/div[2]/span[2]/div[1]')
+            closeradd()
+            print(f)
+            f = f * 60
+                f = f + 1
+            time.sleep(f)
+
+            driver.close()
+
     elif "bye" in text:
         speak("Have a nice day ! ")
         driver.quit()
@@ -139,5 +221,3 @@ while True:
     #testing git commits
     else:
         print('I cannot hear you')
-
-#starting the if statements
