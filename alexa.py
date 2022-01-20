@@ -57,6 +57,25 @@ def closeradd():
         skipad = driver.find_element_by_xpath('//*[@id="ad-text:6"]').click()
     else:
         time.sleep(thing2)
+nottime = 0
+f = '0'
+contains_digit = 0
+
+def takething():
+    global text
+    global contains_digit
+    global f
+    for character in text:
+        if character.isdigit():
+            contains_digit = True
+            f = f + character
+    if contains_digit > 0:
+        f = f.replace('0', "", 1)
+        print(contains_digit)
+        print(f)
+        text = text.replace(f, "")
+        f = int(f)
+
 def speak(audio):
     engine.say(audio)
     engine.runAndWait()
@@ -131,9 +150,8 @@ while True:
             chrome_options.add_experimental_option("detach", True)
             driver = webdriver.Chrome(chrome_options = chrome_options, executable_path=r'C:\Users\jeetd\downloads\chromedriver')
             wait = WebDriverWait(driver, 25)
-
             driver.get(youtub2)
-            wait.until(expected_conditions.element_to_be_clickable((By.XPATH,'//*[@id="contents"]/ytmusic-responsive-list-item-renderer[2]/div[2]/div[1]/yt-formatted-string/a'))).click()
+            wait.until(expected_conditions.element_to_be_clickable((By.XPATH,'//*[@id="contents"]/ytmusic-shelf-renderer[2]/div[2]/ytmusic-responsive-list-item-renderer[1]/div[2]/div[1]/yt-formatted-string/a'))).click()
             wait.until(expected_conditions.visibility_of_element_located((By.XPATH,'//*[@id="left-controls"]/span')))
             time.sleep(4)
             nottime = driver.find_element_by_xpath('//*[@id="player-overlay:0"]/div[2]/span[2]/div[1]')
@@ -145,18 +163,7 @@ while True:
         elif 'playlist' in text:
             text = text.replace('playlist', "")
             text = text.replace(' ', "+")
-            f = '0'
-            for character in text:
-
-                if character.isdigit():
-
-                    contains_digit = True
-                    f = f + character
-            f = f.replace('0', "", 1)
-            print(contains_digit)
-            print(f)
-            text = text.replace(f, "")
-            f = int(f)
+            takething()
             text = text +' playlist'
             youtub2 = 'https://music.youtube.com/search?q='
             youtub2 = youtub2 + text
@@ -165,7 +172,7 @@ while True:
             driver = webdriver.Chrome(chrome_options = chrome_options, executable_path=r'C:\Users\jeetd\downloads\chromedriver')
             wait = WebDriverWait(driver, 25)
             driver.get(youtub2)
-            wait.until(expected_conditions.element_to_be_clickable((By.XPATH,'//*[@id="contents"]/ytmusic-responsive-list-item-renderer[2]/div[2]/div[1]/yt-formatted-string/a'))).click()
+            wait.until(expected_conditions.element_to_be_clickable((By.XPATH,'//*[@id="contents"]/ytmusic-shelf-renderer[2]/div[2]/ytmusic-responsive-list-item-renderer[1]/div[2]/div[1]/yt-formatted-string/a'))).click()
             wait.until(expected_conditions.element_to_be_clickable((By.XPATH, '//*[@id="play-button"]/div/yt-icon'))).click()
             time.sleep(4)
             nottime = driver.find_element_by_xpath('//*[@id="player-overlay:0"]/div[2]/span[2]/div[1]')
@@ -174,24 +181,11 @@ while True:
             f = f * 60
             f = f + 1
             time.sleep(f)
-
             driver.close()
         elif 'artist' in text:
             text = text.replace('artist', "")
             text = text.replace(' ', "+")
-            f = '0'
-            for character in text:
-
-                if character.isdigit():
-
-                    contains_digit = True
-                    f = f + character
-            f = f.replace('0', "", 1)
-            print(contains_digit)
-            print(f)
-            text = text.replace(f, "")
-            f = int(f)
-            text = text +' artist'
+            takething()
             youtub2 = 'https://music.youtube.com/search?q='
             youtub2 = youtub2 + text
             chrome_options = Options()
@@ -199,18 +193,16 @@ while True:
             driver = webdriver.Chrome(chrome_options = chrome_options, executable_path=r'C:\Users\jeetd\downloads\chromedriver')
             wait = WebDriverWait(driver, 25)
             driver.get(youtub2)
-            wait.until(expected_conditions.element_to_be_clickable((By.XPATH,'//*[@id="contents"]/ytmusic-responsive-list-item-renderer[2]/div[2]/div[1]/yt-formatted-string/a'))).click()
+            wait.until(expected_conditions.element_to_be_clickable((By.XPATH,'//*[@id="contents"]/ytmusic-responsive-list-item-renderer/a'))).click()
             wait.until(expected_conditions.element_to_be_clickable((By.XPATH, '//*[@id="play-button"]/div/yt-icon'))).click()
             time.sleep(4)
             nottime = driver.find_element_by_xpath('//*[@id="player-overlay:0"]/div[2]/span[2]/div[1]')
             closeradd()
             print(f)
             f = f * 60
-                f = f + 1
+            f = f + 1
             time.sleep(f)
-
             driver.close()
-
     elif "bye" in text:
         speak("Have a nice day ! ")
         driver.quit()
