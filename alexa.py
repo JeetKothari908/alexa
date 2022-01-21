@@ -37,7 +37,11 @@ def closer():
     round(thing2)
     thing = int(thing2)
     print(thing2)
-    time.sleep(thing2)
+    thing = thing2
+    while thing2>= 1:
+        print(thing2)
+        time.sleep(1)
+        thing2 -= 1
 def closeradd():
     thing = 0
     thing = nottime.text
@@ -56,7 +60,10 @@ def closeradd():
         time.sleep(6)
         skipad = driver.find_element_by_xpath('//*[@id="ad-text:6"]').click()
     else:
-        time.sleep(thing2)
+            while thing2>= 1:
+                print(thing2)
+                time.sleep(1)
+                thing2 -= 1
 nottime = 0
 f = '0'
 contains_digit = 0
@@ -94,8 +101,9 @@ def command():
             except:
                 print("Try Again")
 while True:
-    text = command().lower() ## takes user command
-    #text = input('testing version, what do you want to do?')
+    #stext = command().lower() ## takes user command
+    text = input('testing version, what do you want to do?')
+
     text = text.replace('alexa', "")
     if 'what time is it' in text:
         time = datetime.datetime.now().strftime('%I %M %p')
@@ -151,7 +159,7 @@ while True:
             driver = webdriver.Chrome(chrome_options = chrome_options, executable_path=r'C:\Users\jeetd\downloads\chromedriver')
             wait = WebDriverWait(driver, 25)
             driver.get(youtub2)
-            wait.until(expected_conditions.element_to_be_clickable((By.XPATH,'//*[@id="contents"]/ytmusic-shelf-renderer[2]/div[2]/ytmusic-responsive-list-item-renderer[1]/div[2]/div[1]/yt-formatted-string/a'))).click()
+            wait.until(expected_conditions.element_to_be_clickable((By.XPATH,'//*[@id="contents"]/ytmusic-shelf-renderer[2]/div[2]/ytmusic-responsive-list-item-renderer[1]/div[2]'))).click()
             wait.until(expected_conditions.visibility_of_element_located((By.XPATH,'//*[@id="left-controls"]/span')))
             time.sleep(4)
             nottime = driver.find_element_by_xpath('//*[@id="player-overlay:0"]/div[2]/span[2]/div[1]')
@@ -172,7 +180,7 @@ while True:
             driver = webdriver.Chrome(chrome_options = chrome_options, executable_path=r'C:\Users\jeetd\downloads\chromedriver')
             wait = WebDriverWait(driver, 25)
             driver.get(youtub2)
-            wait.until(expected_conditions.element_to_be_clickable((By.XPATH,'//*[@id="contents"]/ytmusic-shelf-renderer[2]/div[2]/ytmusic-responsive-list-item-renderer[1]/div[2]/div[1]/yt-formatted-string/a'))).click()
+            wait.until(expected_conditions.element_to_be_clickable((By.XPATH,'//*[@id="contents"]/ytmusic-shelf-renderer[2]/div[2]/ytmusic-responsive-list-item-renderer[1]/div[2]'))).click()
             wait.until(expected_conditions.element_to_be_clickable((By.XPATH, '//*[@id="play-button"]/div/yt-icon'))).click()
             time.sleep(4)
             nottime = driver.find_element_by_xpath('//*[@id="player-overlay:0"]/div[2]/span[2]/div[1]')
