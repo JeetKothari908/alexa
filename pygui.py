@@ -1,15 +1,14 @@
 from PyQt5.QtWidgets import QWidget, QApplication, QPushButton
-from alexa import alexathing, closer, closeradd, takething
-
+from alexa import alexathing
 application = QApplication([])
 mainWindow = QWidget()
 mainWindow.setGeometry(0, 0, 350, 400)
-mainWindow.setWindowTitle('Slot and Signal')
-thing = 1
-dont = 1
+mainWindow.setWindowTitle('Alexa')
+def alexathingthing():
+    alexathing(1)
 
 pushButton = QPushButton(parent=mainWindow, text='Click me')
-pushButton.clicked.connect(alexathing(1))
+pushButton.clicked.connect(alexathingthing)
 
 mainWindow.show()
 application.exec()
