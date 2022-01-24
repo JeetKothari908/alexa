@@ -103,143 +103,143 @@ def command():
             except:
                 print("Try Again")
 def alexathing(number):
-    global thething
+    thething = 0
     number = int(number)
-    while thething < number:
-        text = command().lower()
-        text = text.replace('alexa', "")
-        if 'what time is it' in text:
-            thething = thething + 1
-            time = datetime.datetime.now().strftime('%I %M %p')
-            good = "it is", time
-            speak(good)
+    while number > thething:
+        while True:
+            text = command().lower()
+            text = text.replace('alexa', "")
+            if 'what time is it' in text:
+                time = datetime.datetime.now().strftime('%I %M %p')
+                good = "it is", time
+                speak(good)
+                thething = thething + 1
+            elif 'who is' in text:
+                text = text.replace('who is', "")
+                speak(wikipedia.summary(text, 2))
+                thething = thething + 1
+            elif 'Google' in text:
+                # replacing the text without google in it
+                text = text.replace('Google', "")
+                # searching up the thing in a new tab
+                chrome_options = Options()
+                chrome_options.add_experimental_option("detach", True)
+                driver = webdriver.Chrome(chrome_options=chrome_options,
+                                          executable_path=r'C:\Users\jeetd\downloads\chromedriver')
+                wait = WebDriverWait(driver, 25)
 
-        elif 'who is' in text:
-            thething = thething + 1
-            text = text.replace('who is', "")
-            speak(wikipedia.summary(text, 2))
+                driver.get("https://www.google.com/search?q=" + text + "&start=")
+                thething = thething + 1
+            elif 'google' in text:
+                # replacing the text without google in it
+                text = text.replace('google', "")
+                # searching up the thing in a new tab
+                chrome_options = Options()
+                chrome_options.add_experimental_option("detach", True)
+                driver = webdriver.Chrome(chrome_options=chrome_options,
+                                          executable_path=r'C:\Users\jeetd\downloads\chromedriver')
+                wait = WebDriverWait(driver, 25)
 
-        elif 'Google' in text:
-            thething = thething + 1
-            # replacing the text without google in it
-            text = text.replace('Google', "")
-            # searching up the thing in a new tab
-            chrome_options = Options()
-            chrome_options.add_experimental_option("detach", True)
-            driver = webdriver.Chrome(chrome_options=chrome_options,
-                                      executable_path=r'C:\Users\jeetd\downloads\chromedriver')
-            wait = WebDriverWait(driver, 25)
-
-            driver.get("https://www.google.com/search?q=" + text + "&start=")
-        elif 'google' in text:
-            thething = thething + 1
-            # replacing the text without google in it
-            text = text.replace('google', "")
-            # searching up the thing in a new tab
-            chrome_options = Options()
-            chrome_options.add_experimental_option("detach", True)
-            driver = webdriver.Chrome(chrome_options=chrome_options,
-                                      executable_path=r'C:\Users\jeetd\downloads\chromedriver')
-            wait = WebDriverWait(driver, 25)
-
-            driver.get("https://www.google.com/search?q=" + text + "&start=")
-        elif 'watch' in text:
-            thething = thething + 1
-            text = text.replace("watch", '')
-            text = text.replace(" ", '+')
-            youtub2 = 'https://www.youtube.com/results?search_query='
-            youtub2 = youtub2 + text
-            chrome_options = Options()
-            chrome_options.add_experimental_option("detach", True)
-            driver = webdriver.Chrome(chrome_options=chrome_options,
-                                      executable_path=r'C:\Users\jeetd\downloads\chromedriver')
-            wait = WebDriverWait(driver, 25)
-
-            driver.get(youtub2)
-            wait.until(expected_conditions.element_to_be_clickable((By.ID, "video-title"))).click()
-
-        elif 'listen to' in text:
-            thething = thething + 1
-            text = text.replace('listen to', "")
-            if 'song' in text:
-                text = text.replace('song', "")
-                text = text.replace(' ', "+")
-                youtub2 = 'https://music.youtube.com/search?q='
+                driver.get("https://www.google.com/search?q=" + text + "&start=")
+                thething = thething + 1
+            elif 'watch' in text:
+                text = text.replace("watch", '')
+                text = text.replace(" ", '+')
+                youtub2 = 'https://www.youtube.com/results?search_query='
                 youtub2 = youtub2 + text
                 chrome_options = Options()
                 chrome_options.add_experimental_option("detach", True)
                 driver = webdriver.Chrome(chrome_options=chrome_options,
                                           executable_path=r'C:\Users\jeetd\downloads\chromedriver')
                 wait = WebDriverWait(driver, 25)
-                driver.get(youtub2)
-                wait.until(expected_conditions.element_to_be_clickable((By.XPATH,
-                                                                        '//*[@id="contents"]/ytmusic-shelf-renderer[2]/div[2]/ytmusic-responsive-list-item-renderer[1]/div[2]/div[1]/yt-formatted-string/a'))).click()
-                wait.until(
-                    expected_conditions.visibility_of_element_located((By.XPATH, '//*[@id="left-controls"]/span')))
-                time.sleep(4)
-                nottime = driver.find_element(By.XPATH, '//*[@id="player-overlay:0"]/div[2]/span[2]/div[1]')
-                closeradd(nottime)
-                time.sleep(1)
-                nottime = driver.find_element(By.XPATH, '//*[@id="left-controls"]/span')
-                closer(nottime)
-                driver.close()
-            elif 'playlist' in text:
-                text = text.replace('playlist', "")
-                text = text.replace(' ', "+")
-                takething()
-                text = text + ' playlist'
-                youtub2 = 'https://music.youtube.com/search?q='
-                youtub2 = youtub2 + text
-                chrome_options = Options()
-                chrome_options.add_experimental_option("detach", True)
-                driver = webdriver.Chrome(chrome_options=chrome_options,
-                                          executable_path=r'C:\Users\jeetd\downloads\chromedriver')
-                wait = WebDriverWait(driver, 25)
-                driver.get(youtub2)
-                wait.until(expected_conditions.element_to_be_clickable((By.XPATH,
-                                                                        '//*[@id="contents"]/ytmusic-shelf-renderer[2]/div[2]/ytmusic-responsive-list-item-renderer[1]/div[2]/div[1]/yt-formatted-string/a'))).click()
-                wait.until(expected_conditions.element_to_be_clickable(
-                    (By.XPATH, '//*[@id="play-button"]/div/yt-icon'))).click()
-                time.sleep(4)
-                nottime = driver.find_element(By.XPATH, '//*[@id="player-overlay:0"]/div[2]/span[2]/div[1]')
-                closeradd(nottime)
-                print(f)
-                f = f * 60
-                f = f + 1
-                time.sleep(f)
 
-            elif 'artist' in text:
-                text = text.replace('artist', "")
-                text = text.replace(' ', "+")
-                takething()
-                youtub2 = 'https://music.youtube.com/search?q='
-                youtub2 = youtub2 + text
-                chrome_options = Options()
-                chrome_options.add_experimental_option("detach", True)
-                driver = webdriver.Chrome(chrome_options=chrome_options,
-                                          executable_path=r'C:\Users\jeetd\downloads\chromedriver')
-                wait = WebDriverWait(driver, 25)
                 driver.get(youtub2)
-                wait.until(expected_conditions.element_to_be_clickable(
-                    (By.XPATH, '//*[@id="contents"]/ytmusic-responsive-list-item-renderer/a'))).click()
-                wait.until(expected_conditions.element_to_be_clickable(
-                    (By.XPATH, '//*[@id="play-button"]/div/yt-icon'))).click()
-                time.sleep(4)
-                nottime = driver.find_element(By.XPATH, '//*[@id="player-overlay:0"]/div[2]/span[2]/div[1]')
-                closeradd(nottime)
-                print(f)
-                f = f * 60
-                f = f + 1
-                time.sleep(f)
-                driver.close()
-        elif "bye" in text:
-            thething = thething + 1
-            speak("Have a nice day ! ")
-            driver.quit()
-            exit()
-        # elif 'joke' in text: DO NOT USE PYJOKES- IT IS HORRIBLE
-        # elif text == "what is the weather":
-        # potentially make an alarm system using datetime and the text to speech thing
-        # testing git commits
-        else:
-            print('I cannot hear you')
+                wait.until(expected_conditions.element_to_be_clickable((By.ID, "video-title"))).click()
+                thething = thething + 1
+            elif 'listen to' in text:
+                text = text.replace('listen to', "")
+                if 'song' in text:
+                    text = text.replace('song', "")
+                    text = text.replace(' ', "+")
+                    youtub2 = 'https://music.youtube.com/search?q='
+                    youtub2 = youtub2 + text
+                    chrome_options = Options()
+                    chrome_options.add_experimental_option("detach", True)
+                    driver = webdriver.Chrome(chrome_options=chrome_options,
+                                              executable_path=r'C:\Users\jeetd\downloads\chromedriver')
+                    wait = WebDriverWait(driver, 25)
+                    driver.get(youtub2)
+                    wait.until(expected_conditions.element_to_be_clickable((By.XPATH,
+                                                                            '//*[@id="contents"]/ytmusic-shelf-renderer[2]/div[2]/ytmusic-responsive-list-item-renderer[1]/div[2]/div[1]/yt-formatted-string/a'))).click()
+                    wait.until(
+                        expected_conditions.visibility_of_element_located((By.XPATH, '//*[@id="left-controls"]/span')))
+                    time.sleep(4)
+                    nottime = driver.find_element(By.XPATH, '//*[@id="player-overlay:0"]/div[2]/span[2]/div[1]')
+                    closeradd(nottime)
+                    time.sleep(1)
+                    nottime = driver.find_element(By.XPATH, '//*[@id="left-controls"]/span')
+                    closer(nottime)
+                    driver.close()
+                    thething = thething + 1
+                elif 'playlist' in text:
+                    text = text.replace('playlist', "")
+                    text = text.replace(' ', "+")
+                    takething()
+                    text = text + ' playlist'
+                    youtub2 = 'https://music.youtube.com/search?q='
+                    youtub2 = youtub2 + text
+                    chrome_options = Options()
+                    chrome_options.add_experimental_option("detach", True)
+                    driver = webdriver.Chrome(chrome_options=chrome_options,
+                                              executable_path=r'C:\Users\jeetd\downloads\chromedriver')
+                    wait = WebDriverWait(driver, 25)
+                    driver.get(youtub2)
+                    wait.until(expected_conditions.element_to_be_clickable((By.XPATH,
+                                                                            '//*[@id="contents"]/ytmusic-shelf-renderer[2]/div[2]/ytmusic-responsive-list-item-renderer[1]/div[2]/div[1]/yt-formatted-string/a'))).click()
+                    wait.until(expected_conditions.element_to_be_clickable(
+                        (By.XPATH, '//*[@id="play-button"]/div/yt-icon'))).click()
+                    time.sleep(4)
+                    nottime = driver.find_element(By.XPATH, '//*[@id="player-overlay:0"]/div[2]/span[2]/div[1]')
+                    closeradd(nottime)
+                    print(f)
+                    f = f * 60
+                    f = f + 1
+                    time.sleep(f)
+                    thething = thething + 1
+
+                elif 'artist' in text:
+                    text = text.replace('artist', "")
+                    text = text.replace(' ', "+")
+                    takething()
+                    youtub2 = 'https://music.youtube.com/search?q='
+                    youtub2 = youtub2 + text
+                    chrome_options = Options()
+                    chrome_options.add_experimental_option("detach", True)
+                    driver = webdriver.Chrome(chrome_options=chrome_options,
+                                              executable_path=r'C:\Users\jeetd\downloads\chromedriver')
+                    wait = WebDriverWait(driver, 25)
+                    driver.get(youtub2)
+                    wait.until(expected_conditions.element_to_be_clickable(
+                        (By.XPATH, '//*[@id="contents"]/ytmusic-responsive-list-item-renderer/a'))).click()
+                    wait.until(expected_conditions.element_to_be_clickable(
+                        (By.XPATH, '//*[@id="play-button"]/div/yt-icon'))).click()
+                    time.sleep(4)
+                    nottime = driver.find_element(By.XPATH, '//*[@id="player-overlay:0"]/div[2]/span[2]/div[1]')
+                    closeradd(nottime)
+                    print(f)
+                    f = f * 60
+                    f = f + 1
+                    time.sleep(f)
+                    driver.close()
+                    thething = thething + 1
+            elif "bye" in text:
+                speak("Have a nice day ! ")
+                driver.quit()
+                thething = thething + 1
+                exit()
+            # elif 'joke' in text: DO NOT USE PYJOKES- IT IS HORRIBLE
+            # elif text == "what is the weather":
+            # potentially make an alarm system using datetime and the text to speech thing
+            # testing git commits
+            else:
+                print('I cannot hear you')
