@@ -78,66 +78,67 @@ def closeradd(nottime):
 
 text = input('testing version ')
 text = text.replace('listen to', "")
-if 'song' in text:
-    text = text.replace('song', "")
-    text = text.replace(' ', "+")
-    youtub2 = 'https://music.youtube.com/search?q='
-    youtub2 = youtub2 + text
-    chrome_options = Options()
-    chrome_options.add_experimental_option("detach", True)
-    driver = webdriver.Chrome(chrome_options=chrome_options, executable_path=r'C:\Users\jeetd\downloads\chromedriver')
-    wait = WebDriverWait(driver, 25)
-    driver.get(youtub2)
-    wait.until(expected_conditions.element_to_be_clickable((By.XPATH,'//*[@id="contents"]/ytmusic-shelf-renderer[2]/div[2]/ytmusic-responsive-list-item-renderer[1]/div[2]/div[1]/yt-formatted-string/a'))).click()
-    wait.until(expected_conditions.visibility_of_element_located((By.XPATH, '//*[@id="left-controls"]/span')))
-    time.sleep(4)
-    nottime = driver.find_element(By.XPATH,'//*[@id="player-overlay:0"]/div[2]/span[2]/div[1]')
-    closeradd(nottime)
-    time.sleep(1)
-    nottime = driver.find_element(By.XPATH,'//*[@id="left-controls"]/span')
-    closer(nottime)
-    driver.close()
-elif 'playlist' in text:
-    text = text.replace('playlist', "")
-    text = text.replace(' ', "+")
-    takething()
-    text = text +' playlist'
-    youtub2 = 'https://music.youtube.com/search?q='
-    youtub2 = youtub2 + text
-    chrome_options = Options()
-    chrome_options.add_experimental_option("detach", True)
-    driver = webdriver.Chrome(chrome_options=chrome_options, executable_path=r'C:\Users\jeetd\downloads\chromedriver')
-    wait = WebDriverWait(driver, 25)
-    driver.get(youtub2)
-    wait.until(expected_conditions.element_to_be_clickable((By.XPATH,'//*[@id="contents"]/ytmusic-shelf-renderer[2]/div[2]/ytmusic-responsive-list-item-renderer[1]/div[2]/div[1]/yt-formatted-string/a'))).click()
-    wait.until(expected_conditions.element_to_be_clickable((By.XPATH, '//*[@id="play-button"]/div/yt-icon'))).click()
-    time.sleep(4)
-    nottime = driver.find_element(By.XPATH,'//*[@id="player-overlay:0"]/div[2]/span[2]/div[1]')
-    closeradd(nottime)
-    print(f)
-    f = f * 60
-    f = f + 1
-    time.sleep(f)
+def youtubemusic():
+    if 'song' in text:
+        text = text.replace('song', "")
+        text = text.replace(' ', "+")
+        youtub2 = 'https://music.youtube.com/search?q='
+        youtub2 = youtub2 + text
+        chrome_options = Options()
+        chrome_options.add_experimental_option("detach", True)
+        driver = webdriver.Chrome(chrome_options=chrome_options, executable_path=r'C:\Users\jeetd\downloads\chromedriver')
+        wait = WebDriverWait(driver, 25)
+        driver.get(youtub2)
+        wait.until(expected_conditions.element_to_be_clickable((By.XPATH,'//*[@id="contents"]/ytmusic-shelf-renderer[2]/div[2]/ytmusic-responsive-list-item-renderer[1]/div[2]/div[1]/yt-formatted-string/a'))).click()
+        wait.until(expected_conditions.visibility_of_element_located((By.XPATH, '//*[@id="left-controls"]/span')))
+        time.sleep(4)
+        nottime = driver.find_element(By.XPATH,'//*[@id="player-overlay:0"]/div[2]/span[2]/div[1]')
+        closeradd(nottime)
+        time.sleep(1)
+        nottime = driver.find_element(By.XPATH,'//*[@id="left-controls"]/span')
+        closer(nottime)
+        driver.close()
+    elif 'playlist' in text:
+        text = text.replace('playlist', "")
+        text = text.replace(' ', "+")
+        takething()
+        text = text +' playlist'
+        youtub2 = 'https://music.youtube.com/search?q='
+        youtub2 = youtub2 + text
+        chrome_options = Options()
+        chrome_options.add_experimental_option("detach", True)
+        driver = webdriver.Chrome(chrome_options=chrome_options, executable_path=r'C:\Users\jeetd\downloads\chromedriver')
+        wait = WebDriverWait(driver, 25)
+        driver.get(youtub2)
+        wait.until(expected_conditions.element_to_be_clickable((By.XPATH,'//*[@id="contents"]/ytmusic-shelf-renderer[2]/div[2]/ytmusic-responsive-list-item-renderer[1]/div[2]/div[1]/yt-formatted-string/a'))).click()
+        wait.until(expected_conditions.element_to_be_clickable((By.XPATH, '//*[@id="play-button"]/div/yt-icon'))).click()
+        time.sleep(4)
+        nottime = driver.find_element(By.XPATH,'//*[@id="player-overlay:0"]/div[2]/span[2]/div[1]')
+        closeradd(nottime)
+        print(f)
+        f = f * 60
+        f = f + 1
+        time.sleep(f)
 
-elif 'artist' in text:
-    text = text.replace('artist', "")
-    text = text.replace(' ', "+")
-    takething()
-    youtub2 = 'https://music.youtube.com/search?q='
-    youtub2 = youtub2 + text
-    chrome_options = Options()
-    chrome_options.add_experimental_option("detach", True)
-    driver = webdriver.Chrome(chrome_options=chrome_options, executable_path=r'C:\Users\jeetd\downloads\chromedriver')
-    wait = WebDriverWait(driver, 25)
-    driver.get(youtub2)
-    wait.until(expected_conditions.element_to_be_clickable(
-        (By.XPATH, '//*[@id="contents"]/ytmusic-responsive-list-item-renderer/a'))).click()
-    wait.until(expected_conditions.element_to_be_clickable((By.XPATH, '//*[@id="play-button"]/div/yt-icon'))).click()
-    time.sleep(4)
-    nottime = driver.find_element(By.XPATH,'//*[@id="player-overlay:0"]/div[2]/span[2]/div[1]')
-    closeradd(nottime)
-    print(f)
-    f = f * 60
-    f = f + 1
-    time.sleep(f)
-    driver.close()
+    elif 'artist' in text:
+        text = text.replace('artist', "")
+        text = text.replace(' ', "+")
+        takething()
+        youtub2 = 'https://music.youtube.com/search?q='
+        youtub2 = youtub2 + text
+        chrome_options = Options()
+        chrome_options.add_experimental_option("detach", True)
+        driver = webdriver.Chrome(chrome_options=chrome_options, executable_path=r'C:\Users\jeetd\downloads\chromedriver')
+        wait = WebDriverWait(driver, 25)
+        driver.get(youtub2)
+        wait.until(expected_conditions.element_to_be_clickable(
+            (By.XPATH, '//*[@id="contents"]/ytmusic-responsive-list-item-renderer/a'))).click()
+        wait.until(expected_conditions.element_to_be_clickable((By.XPATH, '//*[@id="play-button"]/div/yt-icon'))).click()
+        time.sleep(4)
+        nottime = driver.find_element(By.XPATH,'//*[@id="player-overlay:0"]/div[2]/span[2]/div[1]')
+        closeradd(nottime)
+        print(f)
+        f = f * 60
+        f = f + 1
+        time.sleep(f)
+        driver.close()
