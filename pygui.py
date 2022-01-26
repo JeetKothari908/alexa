@@ -1,6 +1,5 @@
 from PyQt5.QtWidgets import QWidget, QApplication, QPushButton, QLabel
 from PyQt5.QtGui import QIcon, QPixmap, QFont
-
 from alexa import alexathing
 application = QApplication([])
 mainWindow = QWidget()
@@ -21,6 +20,6 @@ pushButton.setFont(QFont('Arial', 30))
 pushButton.clicked.connect(alexathingthing)
 pushButton.resize(450,450)
 pushButton.move(905,435)
-pushButton.setStyleSheet("background-image : url(images/image.png); border: 2 px solid blue ")
+pushButton.setStyleSheet("background-image : url(images/image.png); border: 0 px solid blue ")
 mainWindow.show()
 application.exec()

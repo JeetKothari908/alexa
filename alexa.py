@@ -17,7 +17,7 @@ engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[0].id)
 driver = 0
-def closer():
+def closer(nottime):
     thing = 0
     thing = nottime.text
     print(thing)
@@ -40,7 +40,7 @@ def closer():
         print(thing2)
         time.sleep(1)
         thing2 -= 1
-def closeradd():
+def closeradd(nottime):
     thing = 0
     thing = nottime.text
     print(thing)
@@ -103,15 +103,17 @@ def command():
             except:
                 print("Try Again")
 def alexathing(number):
+    global driver, f, f
     thething = 0
     number = int(number)
     while number > thething:
         while True:
-            text = command().lower()
+            #text = command().lower()
+            text = input('what is text?')
             text = text.replace('alexa', "")
             if 'what time is it' in text:
-                time = datetime.datetime.now().strftime('%I %M %p')
-                good = "it is", time
+                nottime: str = datetime.datetime.now().strftime('%I %M %p')
+                good = "it is", nottime
                 speak(good)
                 thething = thething + 1
             elif 'who is' in text:
@@ -169,10 +171,8 @@ def alexathing(number):
                                               executable_path=r'C:\Users\jeetd\downloads\chromedriver')
                     wait = WebDriverWait(driver, 25)
                     driver.get(youtub2)
-                    wait.until(expected_conditions.element_to_be_clickable((By.XPATH,
-                                                                            '//*[@id="contents"]/ytmusic-shelf-renderer[2]/div[2]/ytmusic-responsive-list-item-renderer[1]/div[2]/div[1]/yt-formatted-string/a'))).click()
-                    wait.until(
-                        expected_conditions.visibility_of_element_located((By.XPATH, '//*[@id="left-controls"]/span')))
+                    wait.until(expected_conditions.element_to_be_clickable((By.XPATH,'//*[@id="contents"]/ytmusic-shelf-renderer[2]/div[2]/ytmusic-responsive-list-item-renderer[1]/div[2]/div[1]/yt-formatted-string/a'))).click()
+                    wait.until(expected_conditions.visibility_of_element_located((By.XPATH, '//*[@id="left-controls"]/span')))
                     time.sleep(4)
                     nottime = driver.find_element(By.XPATH, '//*[@id="player-overlay:0"]/div[2]/span[2]/div[1]')
                     closeradd(nottime)
@@ -243,3 +243,4 @@ def alexathing(number):
             # testing git commits
             else:
                 print('I cannot hear you')
+    exit()
