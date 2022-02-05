@@ -105,6 +105,7 @@ def command():
 
 while True:
     text = command().lower()
+    #text = input('thing ')
     text = text.replace('alexa', "")
     if 'what time is it' in text:
         nottime = datetime.datetime.now().strftime('%I %M %p')
@@ -152,6 +153,10 @@ while True:
 
         driver.get(youtub2)
         wait.until(expected_conditions.element_to_be_clickable((By.ID, "video-title"))).click()
+        time.sleep(1)
+        nottime = driver.find_element(By.XPATH,'//*[@id="movie_player"]/div[33]/div[2]/div[1]/div[1]/span[2]/span[3]')
+        closer(nottime)
+        driver.close()
         thething = thething + 1
     elif 'listen to' in text:
         text = text.replace('listen to', "")
