@@ -21,5 +21,5 @@ class Application(tk.Frame):
         alexathing(1)
 
 root = tk.Tk()
-app = Application(master=root)
+app = Application(master=wroot)
 app.mainloop()
