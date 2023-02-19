@@ -12,7 +12,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 import time
-#finished imports lmaoooo
+#finished imports 
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
